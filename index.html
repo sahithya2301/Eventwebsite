@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <title>Event Organizer</title>
+  <link rel="stylesheet" href="event.css" >
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+:root{
+--main-color:#3867d6;
+}
+*{
+font-family: 'EB Garamond', serif;
+margin:0; padding:0;
+box-sizing:border-box;
+outline:none;border:none;
+text-decoration:none;
+text-transform:capitalize;
+transition:all .2s linear;
+}
+html{
+font-size:62.5%;
+overflow-x:hidden;
+scroll-padding-top:7rem;
+scroll-behavior:smooth;
+}
+html::-webkit-scrollbar{
+width:1rem;
+}
+html::-webkit-scrollbar-track{
+background:#444;
+}
+html::-webkit-scrollbar-thumb{
+background:var(--main-color);
+border-radius:5rem;
+}
+body{
+background:#222;
+}
+section{
+padding:2rem 9%;
+}
+.heading{
+text-align:center;
+padding-bottom:2rem;
+color:#fff;
+text-transform:uppercase;
+font-size:4rem;
+}
+.heading span{
+color:var(--main-color);
+text-transform:uppercase;
+}
+.btn{
+margin-top:1rem;
+display:inline-block;
+padding:.8rem 3rem;
+font-size:1.7rem;
+border-radius:.5rem;
+background:#666;
+color:#fff;
+cursor:pointer;
+font-weight:600;
+}
+.btn:hover{
+background:var(--main-color);
+}
+
+.header{
+position:fixed;
+top:0; left:0; right:0;
+z-index:1000;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:1.5rem 9%;
+}
+.header .logo{
+font-weight:bolder;
+color:#fff;
+font-size:2.5rem;
+}
+.header .logo span{
+color:var(--main-color);
+}
+.header .navbar a{
+font-size:1.7rem;
+color:black;
+margin-right:2rem;
+}
+.header .navbar a:hover{
+color:var(--main-color);
+}
+#menu-bars{
+font-size:3rem;
+color:#fff;
+cursor:pointer;
+display:none;
+}
+.home .content{
+text-align:center;
+padding-top:6rem;
+margin:2rem auto;
+max-width:70rem;
+}
+.home .content h3{
+color:#fff;
+font-size:2.0rem;
+text-transform:uppercase;
+}
+.home .content h3 span{
+color:var(--main-color);
+text-transform:uppercase;
+}
+.home .home-slider .swiper-slide{
+overflow:hidden;
+border-radius:.5rem;
+height:50rem;
+width:35rem;
+}
+.home .home-slider .swiper-slide img{
+height:100%;
+width:100%;
+object-fit:cover;
+}
+.service .box-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(27rem, 1fr));
+gap:1.5rem;
+}
+.service .box-container .box{
+border-radius: .5rem;
+background:#333;
+text-align:center;
+padding:2.5rem;
+}
+.service .box-container .box i{
+height:6rem;
+width:6rem;
+line-height:6rem;
+border-radius:50%;
+font-size:2.5rem;
+background:var(--main-color);
+color:#fff;
+}
+.service .box-container .box h3{
+font-size:2rem;
+color:#fff;
+padding:1rem 0;
+}
+.about .row{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:1.5rem;
+}
+.about .row .image{
+flex:1 1 45rem;'
+padding:1rem;
+}
+.about .row .image img{
+width:100%;
+border-radius:.5rem;
+border:1rem solid #333;
+}
+.about .row .content{
+flex:1 1 45rem;
+}
+.about .row .content h3{
+font-size:3.5rem;
+color:#fff;
+}
+.about .row .content p{
+font-size:1.5rem;
+color:#eee;
+padding:1rem 0;
+line-height:2;
+}
+.gallery .box-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(27rem, 1fr));
+gap:1.5rem;
+}
+.gallery .box-container .box{
+position:relative;
+border:1rem solid #333;
+border-radius:.5rem;
+height:25rem;
+cursor:pointer;
+overflow:hidden;
+}
+.gallery .box-container .box img{
+height:100%;
+width:100%;
+object-fit:cover;
+}
+.gallery .box-container .box:hover img{
+transform:scale(1.1);
+filter:grayscale();
+}
+.gallery .box-container .box .title{
+position:absolute;
+top:-10rem; left:0; right:0;
+background:#333;
+color:#fff;
+text-align:center;
+padding-bottom:1rem;
+font-size:2rem;
+}
+.gallery .box-container .box:hover .title{
+top:0;
+}
+.gallery .box-container .box .icons{
+position:absolute;
+bottom:-10rem; left:0; right:0;
+background:#333;
+padding-top:1rem;
+text-align:center;
+
+}
+.gallery .box-container .box:hover .icons{
+bottom:0;
+}
+
+.gallery .box-container .box .icons a{
+font-size:2rem;
+margin:.5rem 1rem;
+color:#fff;
+}
+.gallery .box-container .box .icons a:hover{
+color:var(--main-color);
+}
+.price .box-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(15rem, 1fr));
+gap:1.5rem;
+}
+.price .box-container .box{
+padding:2rem 0;
+background:#333;
+border-radius:.5rem;
+text-align:center;
+}
+.price .box-container .box:hover{
+transform:scale(1.03);
+}
+.price .box-container .box .title{
+background:var(--main-color);
+color:#fff;
+padding:1.5rem 0;
+font-size:2rem;
+}
+.price .box-container .box .title .amount{
+color:#fff;
+padding-top:1rem;
+font-size:4rem;
+}
+.price .box-container .box ul{
+list-style-type:none;
+padding:1rem 0;
+}
+.price .box-container .box ul li{
+font-size:1.5rem;
+color:#eee;
+padding:1rem 0;
+}
+.price .box-container .box ul li i{
+color:var(--main-color);
+padding-right: .5rem;
+}
+ul li:before {
+  content: '✓';
+}
+.review .box{
+border-radius: .5rem;
+background:#333;
+padding:2rem;
+position:relative;
+}
+.review .box .fa-quote-right{
+position:absolute;
+top:2rem; right:2rem;
+color:var(--main-color);
+font-size:5rem;
+}
+.review .box .user{
+display:flex;
+align-items:center;
+gap:1.5rem;
+padding-bottom:1rem;
+}
+.review .box .user img{
+height:7rem;
+width:7rem;
+border-radius:50%;
+object-fit:cover;
+}
+.review .box .user h3{
+font-size:2rem;
+color:#fff;
+}
+.review .box .user span{
+font-size:1.5rem;
+color:#eee;
+}
+.review .box p{
+line-height:2;
+color:#eee;
+padding:.5rem 0;
+font-size:1.6rem;
+}
+.contact form{
+max-width:70rem;
+margin:1rem auto;
+text-align:center;
+}
+.contact form .inputBox{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+.logo {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style the logo text */
+  .logo a {
+    text-decoration: none;
+    color: #333; /* Change the color to your preference */
+    font-size: 24px; /* Change the font size to your preference */
+    font-weight: bold;
+  }
+.whatsapp {
+    position: fixed;
+    right: 10px; /* Adjust the position as needed */
+    bottom: 20px; /* Adjust the position as needed */
+    z-index: 999; /* Make sure it's above other elements */
+}
+
+  /* Style the logo image */
+  .logo img {
+    width: 100px; /* Adjust the width to your preference */
+    height: 50px; /* Adjust the height to your preference */
+    margin-right: 10px; /* Add some spacing between the logo text and image */
+  }
+.contact form .inputBox input,
+.contact form textarea{
+width:100%;
+background:#333;
+border-radius:.5rem;
+padding:1rem;
+margin:.7rem 0;
+font-size:1.5rem;
+color:#fff;
+text-transform:none;
+}
+.contact form .inputBox input::placeholder,
+.contact form textarea::placeholder{
+color:#eee;
+text-transform:capitalize;
+}
+.contact form .inputBox input:focus,
+.contact form textarea:focus{
+background:#444;
+}
+.contact form .inputBox input{
+width:49%;
+}
+.contact form textarea{
+resize:none;
+}
+.calendar img{
+width:50%;
+height:30%;
+}
+.image-link {
+    display: flex;
+    align-items: center; /* Vertically align the image and text */
+}
+.Calendar p{
+margin:0;
+font-size:20px;
+color: #eee;
+margin-left: 20px; /* Add space to the left of the paragraph */
+  margin-right: 10px; /* Add space to the right of the paragraph */
+  margin-top: 10px; /* Add space above the paragraph */
+  margin-bottom: 10px;
+}
+.footer{
+background:#111;
+}
+.footer .box-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(25rem, 1fr));
+gap:1.5rem;
+text-align:center;
+}
+.footer .box-container .box h3{
+font-size:2.5rem;
+padding:1rem 0;
+color:#fff;
+}
+.footer .box-container .box a{
+display:block;
+font-size:1.5rem;
+padding:1rem 0;
+color:#eee;
+}
+.footer .box-container .box a i{
+padding-right: .5rem;
+color:var(--main-color);
+}
+.footer .box-container .box a:hover i{
+padding-right:1.5rem;
+color:#fff;
+}
+.footer .credit{
+text-align:center;
+border-top: 0.1rem solid #222;
+color:#fff;
+padding:2rem;
+padding-top:2.5rem;
+margin-top:1rem;
+font-size:2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:991px){
+html{
+font-size:55%;
+  }
+.header{
+padding:1.5rem 2 rem;
+}
+}
+@media (max-width:768px){
+#menu-bars{
+display:initial;
+}
+.header .navbar{
+position:absolute;
+top:100%; left:0; right:0;
+border-top: .1rem solid #222;
+background:#333;
+clip-path:polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+.header .navbar .active{
+clip-path:polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+.fa-times{
+transform:rotate(180deg);
+}
+.header .navbar a{
+display:flex;
+background:#222;
+border-radius: .5rem;
+padding:1.3rem;
+margin:1.3rem;
+font-size:2rem;
+ }
+}
+@media (max-width:450px){
+html{
+font-size:50%;
+  }
+}
+</style>
+ </head>
+  <body>
+<div class="whatsapp"> 
+<a href="https://wa.me/919700218299">
+  <img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png?ga=GA1.1.368147881.1696400322"  width="50%" alt="">
+</a>
+</div>
+<header class="header">
+ 
+ <a href="#" class="logo">
+      <img src="https://cdn.dribbble.com/users/5923019/screenshots/16566397/media/8312b43b5ddb61c957f510bc1f3b84d5.gif" alt="Evento Logo">
+    </a>
+<nav class="navbar">
+<a href="#home">home</a>
+<a href="#services">service</a>
+<a href="#about">about</a>
+<a href="#gallery">gallery</a>
+<a href="#price">price</a>
+<a href="#review">review</a>
+<a href="#contact">contact</a>
+</nav>
+<div id="menu-bars" class="fas fa-bars"></div>
+</header>
+<main>
+<section class="home" id="home">
+ <div class="content">
+   <h3>"Creating Moments, Making Memories."<span> -event organizers </span></h3>
+  <a href="#contact" class="btn">Contact Us</a>
+</div>
+<div class="swiper-container home-slider">
+ <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://img.freepik.com/free-photo/bunch-flowers-leaves-table_1304-4187.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt=""></div>
+    <div class="swiper-slide"><img src="https://img.freepik.com/free-photo/prepared-wedding-hall_8353-9873.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt=""></div>
+    <div class="swiper-slide"><img src="https://img.freepik.com/free-photo/baby-s-gender-reveal-party_23-2150379482.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt=""></div>
+    <div class="swiper-slide"><img src="https://img.freepik.com/premium-photo/room-with-many-colorful-balloons-ceiling_839169-3873.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt=""></div>
+    <div class="swiper-slide"><img src="https://img.freepik.com/free-photo/special-luxury-event-married-rich_1304-3410.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=sph" alt=""></div>
+   <div class="swiper-slide"><img src="https://img.freepik.com/free-photo/people-having-fun-wedding-hall_1303-19593.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=sph" alt=""></div>
+</div>
+</div>
+</section> 
+<section class="service" id="service">
+  <h1 class="heading"> our <span>services</span> </h1>
+  <div class="box-container">
+    <div class="box">
+     <i class="fas fa-map-marker-alt"></i>
+     <h3>venue selection</h3>
+     </div>
+    <div class="box">
+     <i class="fas fa-envelope"></i>
+     <h3>invitation card</h3>
+     </div>
+    <div class="box">
+     <i class="fas fa-music"></i>
+     <h3>entertainment</h3>
+     </div>
+    <div class="box">
+     <i class="fas fa-utensils"></i>
+     <h3>food and drinks</h3>
+     </div>
+    <div class="box">
+     <i class="fas fa-photo-video"></i>
+     <h3>photos and videos</h3>
+     </div>
+   <div class="box">
+     <i class="fas fa-birthday-cake"></i>
+     <h3>custom food</h3>
+     </div>
+   <div class="box">
+     <i class="fas fa-paint-roller"></i>
+     <h3>Decor and Design</h3>
+     </div>
+  <div class="box">
+     <i class="fas fa-stethoscope"></i>
+     <h3>Health and Safety Services</h3>
+     </div>
+</div>
+<section class="Calendar">
+<h1 class="heading"><span>Our Event</span> Calendar </h1>
+<a href="C:\Users\bhavi\OneDrive\Desktop\Eventcalendar.html" class="image-link">
+ <img src="https://images.unsplash.com/photo-1633526543814-9718c8922b7a?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FsZW5kYXJ8ZW58MHx8MHx8fDA%3D" alt="" width=50% />
+<p>"Welcome to our event calendar, your one-stop destination for all the latest happenings, exciting gatherings, and memorable occasions.
+ <br>Join us in celebrating the vibrant tapestry of life and culture. We look forward to sharing these unforgettable moments with you."  </p>
+</a>
+</section>
+<section class="about" id="about">
+<h1 class="heading"><span>about</span> us </h1>
+<div class="row">
+<div class="image">
+   <img src="https://img.freepik.com/free-vector/wedding-planner-concept-illustration_114360-2720.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt="">
+</div>
+<div class="content">
+  <h3>We Will give a very special celebration for you</h3>
+  <p>At Evento, we specialize in creating unforgettable experiences. With a passion for crafting unique and memorable events, our dedicated team is here to turn your vision into reality.</p> 
+<p>Join us in celebrating life's moments, one extraordinary event at a time.</p>
+<a href="#" class="btn">contact us </a>
+</div>
+</div>
+<section class="gallery" id="gallery">
+<h1 class="heading">our <span>gallery</span></h1>
+<div class="box-container">
+<div class="box">
+<img src="https://media.istockphoto.com/id/1458481862/photo/asian-chinese-lesbian-couple-celebrating-birthday-outdoor-dining-with-friends.webp?b=1&s=170667a&w=0&k=20&c=DDUIqMIEmxoJ0kT6v9LEyRC4Xz0pvMfynXhEfdRQSGw=" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://images.pexels.com/photos/1608590/pexels-photo-1608590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://i.pinimg.com/736x/c0/68/34/c0683483a5d2b9711378ce4985870a52.jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://media.istockphoto.com/id/868935172/photo/heres-to-tonight.jpg?s=612x612&w=0&k=20&c=v1ceJ9aZwI43rPaQeceEx5L6ODyWFVwqxqpadC2ljG0=" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?cs=srgb&dl=pexels-matheus-bertelli-2608517.jpg&fm=jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://cdn.pixabay.com/photo/2015/03/30/12/35/sunset-698501_640.jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://thumbs.dreamstime.com/b/young-party-cheerful-people-showered-confetti-club-31137048.jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://images.pexels.com/photos/3171770/pexels-photo-3171770.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+<div class="box">
+<img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?cs=srgb&dl=pexels-matheus-bertelli-2608517.jpg&fm=jpg" alt="">
+<h3 class="title">photos and events</h3>
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-share"></a>
+<a href="#" class="fas fa-eye"></a>
+</div>
+</div>
+</div>
+</section>
+<section class="price" id="price">
+ <h1 class="heading">Our<span>price</span> </h1>
+<div class="box-container">
+<div class="box">
+<h3 class="title">for birthdays</h3>
+<h3 class="amount">Rs.9999</h3>
+<ul>
+<li><i class="fas.fa-check"></i>full services</li>
+<li><i class="fas.fa-check"></i>decorations</li>
+<li><i class="fas.fa-check"></i>music and photos</li>
+<li><i class="fas.fa-check"></i>food and drinks</li>
+<li><i class="fas.fa-check"></i>invitation card</li>
+</ul>
+<a href="#" class="btn">check out</a>
+</div>
+<div class="box">
+<h3 class="title">for weddings</h3>
+<h3 class="amount">Rs.20000</h3>
+<ul>
+<li><i class="fas.fa-check"></i>full services</li>
+<li><i class="fas.fa-check"></i>decorations</li>
+<li><i class="fas.fa-check"></i>music and photos</li>
+<li><i class="fas.fa-check"></i>food and drinks</li>
+<li><i class="fas.fa-check"></i>invitation card</li>
+</ul>
+<a href="#" class="btn">check out</a>
+</div>
+<div class="box">
+<h3 class="title">for concerts</h3>
+<h3 class="amount">Rs.10000</h3>
+<ul>
+<li><i class="fas.fa-check"></i>full services</li>
+<li><i class="fas.fa-check"></i>decorations</li>
+<li><i class="fas.fa-check"></i>music and photos</li>
+<li><i class="fas.fa-check"></i>food and drinks</li>
+<li><i class="fas.fa-check"></i>invitation card</li>
+</ul>
+<a href="#" class="btn">check out</a>
+</div>
+<div class="box">
+<h3 class="title">for others</h3>
+<h3 class="amount">Rs.5999</h3>
+<ul>
+<li><i class="fas.fa-check"></i>full services</li>
+<li><i class="fas.fa-check"></i>decorations</li>
+<li><i class="fas.fa-check"></i>music and photos</li>
+<li><i class="fas.fa-check"></i>food and drinks</li>
+<li><i class="fas.fa-check"></i>invitation card</li>
+</ul>
+<a href="#" class="btn">check out</a>
+</div>
+</div>
+</section>
+<section class="review" id="review">
+<h1 class="heading">client's <span>review</span></h1>
+<div class="review-slider swiper-container">
+<div class="swiper-wrapper">
+<div class="swiper-slide box">
+<i class="fas fa-quote-right"></i>
+  <div class="user">
+  <img src="https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129417.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt="">
+ <div class="user-info">
+ <h3>john deoo</h3>
+<span>happy clients</span>
+</div>
+</div>
+<p>We recently had our wedding at shree convection, and it was an absolutely fantastic experience. From the initial planning stages to the actual event day, everything went smoothly, thanks to the exceptional team at Evento.</p>
+</div>
+<div class="swiper-slide box">
+<i class="fas fa-quote-right"></i>
+  <div class="user">
+  <img src="https://img.freepik.com/free-photo/woman-with-arms-crossed-laughing_23-2148666473.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt="">
+ <div class="user-info">
+ <h3>Himanshi</h3>
+<span>happy clients</span>
+</div>
+</div>
+<p>I recently hosted a birthday party for my daughter's 10th birthday, and I couldn't be happier with how everything turned out. A big thank you to Evento team for making it such a memorable day!</p>
+</div>
+<div class="swiper-slide box">
+<i class="fas fa-quote-right"></i>
+  <div class="user">
+  <img src="https://img.freepik.com/free-photo/man-wearing-waistcoat_1368-2886.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt="">
+ <div class="user-info">
+ <h3>john deoo</h3>
+<span>happy clients</span>
+</div>
+</div>
+<p>We recently hosted a farewell party for our dear colleague, and it was an absolute success, thanks to the wonderful team at Evento. From the initial planning to the final goodbye, everything was executed flawlessly.</p>
+
+</div>
+<div class="swiper-slide box">
+<i class="fas fa-quote-right"></i>
+  <div class="user">
+  <img src="https://img.freepik.com/free-photo/portrait-smiling-young-businesswoman-showing-thumbs-up_114579-64262.jpg?size=626&ext=jpg&ga=GA1.1.368147881.1696400322&semt=ais" alt="">
+ <div class="user-info">
+ <h3>john deoo</h3>
+<span>happy clients</span>
+</div>
+</div>
+<p>We recently celebrated our engagement with a party organized by Evento Team, and it exceeded all our expectations. It was truly an unforgettable celebration that we, along with our family and friends, will cherish for a lifetime.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="contact" id="contact">
+<h1 class="heading"> <span>contact</span> us </h1>
+<form action="https://formspree.io/f/xknlywqo" method="POST">
+<div class="inputBox">
+<input type="text" name="your name" placeholder="name" required>
+<input type="email" name ="email address" id="email" placeholder="email" required>
+</div>
+<div class="inputBox">
+<input type="number" name ="your number" placeholder="number" required>
+<input type="text" name="message"  placeholder="subject" required>
+</div>
+<textarea name="message" placeholder="your message" id="" cols="30" rows="10" required></textarea>
+<input type="submit" value="send message" class="btn">
+</form>
+</section>
+</main>
+<footer>
+<div class="footer">
+<div class="box-container">
+<div class="box">
+ <h3>branches</h3>
+ <a href="#"> <i class="fas fa-map-marker-alt"></i> Tirupati </a>
+ <a href="#"> <i class="fas fa-map-marker-alt"></i> chitoor </a>
+ <a href="#"> <i class="fas fa-map-marker-alt"></i> Nellore </a>
+<a href="#"> <i class="fas fa-map-marker-alt"></i> Chennai </a>
+<a href="#"> <i class="fas fa-map-marker-alt"></i> Banglore </a>
+</div>
+<div class="box">
+ <h3>quick links</h3>
+ <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+<a href="#"> <i class="fas fa-arrow-right"></i> service </a>
+<a href="#"> <i class="fas fa-arrow-right"></i> about </a>
+<a href="#"> <i class="fas fa-arrow-right"></i> gallery </a>
+ <a href="#"> <i class="fas fa-arrow-right"></i> price </a>
+<a href="#"> <i class="fas fa-arrow-right"></i> review </a>
+<a href="#"> <i class="fas fa-arrow-right"></i> contact </a>
+</div>
+<div class="box">
+ <h3>contact info</h3>
+ <a href="#"> <i class="fas fa-phone"></i> +123-456-789 </a>
+<a href="#"> <i class="fas fa-phone"></i> +111-456-7890 </a>
+<a href="#"> <i class="fas fa-envelope"></i> johndeo@gmail.com </a>
+<a href="#"> <i class="fas fa-envelope"></i> jukalkar@gmail.com </a>
+<a href="#"> <i class="fas fa-map-marker-alt"></i> Andhrapradesh, India-517501 </a>
+</div>
+<div class="box">
+ <h3>follow us</h3>
+ <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+<a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+<a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+<a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+</div>
+</div>
+<div class="credit">|all rights reserved|</div>
+</div>
+</footer>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+let menu= document.querySelector('#menu-bars');
+let navbar=document.querySelector('.navbar');
+menu.onclick = () =>{
+menu.classList.toggle('fa-times');
+navbar.classList.toggle('active');
+}
+window.onscroll = () =>{
+menu.classList.remove('fa-times');
+navbar.classList.remove('active');
+}
+      var swiper = new Swiper(".home-slider", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2,
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+  loop:true,
+autoplay:{
+ delay:3000,
+ disableOnInteraction:false,
+}
+      });
+var swiper = new Swiper(".review-slider", {
+       slidesPreview:1,
+        grabCursor: true,
+  loop:true,
+spaceBetween:10,
+breakpoints: {
+0: {
+slidesPerview: 1,
+},
+700: {
+slidesPerview:2,
+},
+1050: {
+slidesPerview:3,
+},
+},
+autoplay:{
+ delay:5000,
+ disableOnInteraction:false,
+}
+      });
+
+
+    </script>
+</body>
+</html>
